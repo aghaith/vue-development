@@ -16,6 +16,7 @@ import {
     confirmed,
     not_one_of as excluded
 } from '@vee-validate/rules';
+
 export default {
     install(app) {
         app.component('VeeForm', VeeForm);
@@ -55,7 +56,12 @@ export default {
                     : `The field ${ctx.field} is invalid.`;
 
                 return message;
-            }
+            },
+
+            validateOnBlur: true,
+            validateOnChange: true,
+            validateOnInput: false,
+            validateOnModelUpdate: true
         });
     }
 }
