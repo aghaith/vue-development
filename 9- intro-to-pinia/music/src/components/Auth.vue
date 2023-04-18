@@ -129,7 +129,7 @@
             <!-- Password -->
             <div class="mb-3">
               <label class="inline-block mb-2">Password</label>
-              <vee-field name="password" :bails="false" v-slut="{ field, errors }">
+              <vee-field name="password" :bails="false" v-slot="{ field, errors }">
                 <input 
                   class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
                   placeholder="Password"
@@ -156,11 +156,12 @@
             <!-- Country -->
             <div class="mb-3">
               <label class="inline-block mb-2">Country</label>
-              <vee-field as="select"
+              <vee-field 
+                as="select"
                 name="country"
                 class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
               >
-                <option value="Katar">Katar</option>
+                <option value="France">France</option>
                 <option value="Lebanon">Lebanon</option>
                 <option value="UAE">United Arab Emirates</option>
                 <option value="USA">USA</option>
@@ -181,7 +182,7 @@
             <button
               type="submit"
               class="block w-full bg-purple-600 text-white py-1.5 px-3 rounded transition hover:bg-purple-700"
-              disabled="reg_in_submission"
+              :disabled="reg_in_submission"
             >
               Submit
             </button>
@@ -207,7 +208,7 @@ export default {
         age: 'required|min_value:18|max_value:100',
         password: 'required|min:9|max:100|excluded:password',
         confirm_password: 'passwords_mismatch:@password',
-        country: 'required|country_excluded:Katar',
+        country: 'required|country_excluded:France',
         tos: 'tos'
       },
       userData: {
@@ -234,7 +235,6 @@ export default {
 
       this.reg_alert_variant = "bg-green-500"
       this.reg_alert_msg = "Success! Your account has been created";
-
       console.log(values);
     }
   }
