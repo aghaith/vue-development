@@ -77,6 +77,8 @@
 
 <script>
 import { auth, usersCollection } from '@/includes/firebase';
+import { mapWritableState } from 'pinia';
+import useUserStore from '@/stores/user';
 
 export default {
     name: "RegisterForm",
@@ -103,6 +105,9 @@ export default {
                 password: 'required|min:9|max:100'
             }
         }
+    },
+    computed: {
+        ...mapWritableState(useUserStore, ['userLoggedIn'])
     },
     methods: {
         async register(values) {
@@ -138,6 +143,8 @@ export default {
                 return;
             }
 
+            this.userStore.userLoggedIn = true;
+            
             this.reg_alert_variant = "bg-green-500"
             this.reg_alert_msg = "Success! Your account has been created";
             console.log(userCred);
