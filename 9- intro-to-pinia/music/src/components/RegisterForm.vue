@@ -107,7 +107,10 @@ export default {
         }
     },
     computed: {
-        ...mapWritableState(useUserStore, ['userLoggedIn'])
+        ...mapWritableState(useUserStore, ['userLoggedIn']),
+        userStore() {
+            return useUserStore();
+        },
     },
     methods: {
         async register(values) {
@@ -143,8 +146,8 @@ export default {
                 return;
             }
 
-            this.userStore.userLoggedIn = true;
-            
+            useUserStore().userLoggedIn = true;
+
             this.reg_alert_variant = "bg-green-500"
             this.reg_alert_msg = "Success! Your account has been created";
             console.log(userCred);
