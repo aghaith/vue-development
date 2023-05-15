@@ -80,7 +80,7 @@ export default {
   computed: {
     ...mapState(useModalStore, ["hiddenClass"]),
     ...mapWritableState(useModalStore, {
-      "modalVisibility": "isOpen"
+      modalVisibility: "isOpen"
     })
   }
 }

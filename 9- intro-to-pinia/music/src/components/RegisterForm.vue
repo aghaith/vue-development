@@ -76,7 +76,6 @@
 </template>
 
 <script>
-
 import { mapActions } from 'pinia';
 import useUserStore from '@/stores/user';
 
@@ -100,10 +99,6 @@ export default {
             reg_show_alert: false,
             reg_alert_variant: 'bg-blue-500',
             reg_alert_msg: 'Please wait! Your account is being created.',
-            loginSchema: {
-                email: "required|email",
-                password: 'required|min:9|max:100'
-            }
         }
     },
     methods: {
