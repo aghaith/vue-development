@@ -5,7 +5,8 @@
       <!-- App Name -->
       <router-link 
         class="text-white font-bold uppercase text-2xl mr-4" 
-        to="/about"
+        to="/"
+        exact-active-class="no-active"
       >Music</router-link>
 
       <div class="flex flex-grow items-center">
