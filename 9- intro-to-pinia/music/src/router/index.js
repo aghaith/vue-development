@@ -16,6 +16,7 @@ const routes= [
   },
   {
     name: 'manage',
+    // alias: '/manage',
     path: '/manage-music',
     component: Manage
   },
@@ -34,5 +35,12 @@ const router = createRouter({
   routes,
   linkExactActiveClass: 'text-yellow-500',
 })
+
+router.beforeEach((to, from, next) => {
+  console.log('Global Guard');
+  console.log(to, from);
+  
+  next();
+});
 
 export default router
