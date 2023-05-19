@@ -106,7 +106,7 @@ export default {
                 await songsCollection.doc(this.song.docId).update(values);
             } catch (error) {
                 this.in_submission = false;
-                this.alert_message = 'bg-red-500';
+                this.alert_variant = 'bg-red-500';
                 this.alert_message = 'Something went wrong! Try again later';
                 return;
             }

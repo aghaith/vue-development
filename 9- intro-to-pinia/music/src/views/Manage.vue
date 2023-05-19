@@ -19,7 +19,7 @@
               <!-- Composition Items -->
               <composition-item 
                 v-for="(song, i) in songs" 
-                :key="song.docID" 
+                :key="song.docId" 
                 :song="song" 
                 :updateSong="updateSong"
                 :index="i"
@@ -61,7 +61,7 @@ export default {
     })
   },
   methods: {
-    updateSongs(i, values) {
+    updateSong(i, values) {
       this.songs[i].modified_name = values.modified_name;
       this.songs[i].genre = values.genre;
     }
