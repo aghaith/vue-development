@@ -24,14 +24,17 @@
                 <i class="fa fa-comments float-right text-green-400 text-2xl"></i>
             </div>
             <div class="p-6">
-                <form>
-                    <textarea
+                <vee-form :validation-schema="schema">
+                    <vee-form 
+                        as="textarea"
+                        name="comment"
                         class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded mb-4"
-                        placeholder="Your comment here..."></textarea>
+                        placeholder="Your comment here..."></vee-form>
+                    <ErrorMessage class="text-red-600" name="comment" />
                     <button type="submit" class="py-1.5 px-3 rounded text-white bg-green-600 block">
                         Submit
                     </button>
-                </form>
+                </vee-form>
                 <!-- Sort Comments -->
                 <select
                     class="block mt-4 py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded">
@@ -125,7 +128,10 @@ export default {
     name: 'Song',
     data () {
         return {
-            song: {}
+            song: {},
+            schema: {
+                comment: 'required|min:3'
+            }
         }
     },
     async created () {
