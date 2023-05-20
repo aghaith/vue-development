@@ -31,12 +31,16 @@
                 >
                     {{ comment_alert_message }}
                 </div>
-                <vee-form :validation-schema="schema" @submit="addComment">
-                    <vee-form 
+                <vee-form 
+                    :validation-schema="schema" 
+                    @submit="addComment" 
+                    v-if="userLoggedIn"
+                >
+                    <vee-field 
                         as="textarea"
                         name="comment"
                         class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded mb-4"
-                        placeholder="Your comment here..."></vee-form>
+                        placeholder="Your comment here..."></vee-field>
                     <ErrorMessage class="text-red-600" name="comment" />
                     <button 
                         type="submit" 
@@ -133,7 +137,9 @@
 </template>
 
 <script>
-import { songsCollection } from '@/includes/firebase';
+import { songsCollection, auth, commentsCollection } from '@/includes/firebase';
+import { mapState } from 'pinia';
+import useUserStore from '@/stores/user';
 
 export default {
     name: 'Song',
@@ -149,6 +155,9 @@ export default {
             comment_alert_message: 'Please wait! Your comment is being submitted'
         }
     },
+    computed: {
+        ...mapState(useUserStore, ['userLoggedIn']),
+    },
     async created () {
         const docSnapshot = await songsCollection.doc(this.$route.params.id).get();
 
@@ -160,11 +169,27 @@ export default {
         this.song = docSnapshot.data();
     },
     methods: {
-        async addComment (values) {
+        async addComment (values, { resetForm }) {
             this.comment_in_submission = true;
             this.comment_show_alert = true;
             this.comment_alert_variant = 'bg-blue-500'
             this.comment_alert_message = 'Please wait! Your comment is being submitted';
+
+            const comment = {
+                content: values.comment,
+                datePosted: new Date().toString(),
+                sid: this.$route.params.id,
+                name: auth.currentUser.displayName,
+                uid: auth.currentUser.uid,
+            }
+
+            await commentsCollection.add(comment);
+
+            this.comment_in_submission = false;
+            this.comment_alert_variant = 'bg-green-500';
+            this.comment_alert_message = 'Comment added!';
+
+            resetForm();
         }
     }
 }
