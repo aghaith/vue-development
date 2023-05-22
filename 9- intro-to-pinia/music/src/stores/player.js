@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import { Howl } from 'howler';
+import helper from '../includes/helper';
 
 export default defineStore('player', {
     state: () => ({
@@ -32,7 +33,7 @@ export default defineStore('player', {
             }
         },
         progress () {
-            this.seek = this.sound.seek();
+            this.seek = helper.formatTime(this.sound.seek());
             this.duration = this.sound.duration();
 
             if (this.sound.playing()) {
