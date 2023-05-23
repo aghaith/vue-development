@@ -16,6 +16,7 @@ export default {
             iconClass += ' text-green-400';
         }
 
+        // eslint-disable-next-line no-param-reassign
         el.innerHTML += `<i class="${iconClass}"></i>`;
     }
 }
