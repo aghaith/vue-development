@@ -8,11 +8,13 @@ import vue from '@vitejs/plugin-vue';
 export default defineConfig({
   plugins: [
     vue(), 
+    /** Generate the manifest file. In addition, it will create a service worker */
     VitePWA({
       registerType: 'autoUpdate',
       devOptions: {
         enabled: true
       },
+      /** Configure the manifest file */
       manifest: {
         name: 'Music App',
         theme_color: '#ff5e3a',
@@ -24,7 +26,9 @@ export default defineConfig({
           }
         ]
       },
+      /** Workbox is a library developed by Google, it will helps us with creating a service worker */
       workbox: {
+        /** Glob is a package for searching for files with patterns */
         globPatterns: ['**/*.{js,css,html,png,jpg}']
       }
     })
