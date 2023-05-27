@@ -7,7 +7,7 @@
         @input="update($event)"
         :class="{
             'is-valid': validateEmail(email),
-            'is-invalid': !validateEmail(email),
+            'is-invalid': email && !validateEmail(email),
         }"
     />
 </template>
